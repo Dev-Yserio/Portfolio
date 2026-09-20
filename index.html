@@ -1,0 +1,636 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Porfolio</title>
+    <link rel="icon" type="image/svg+xml" href="image/favicon-icon-svg.svg">
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css">
+    <style>
+        
+
+    </style>
+</head>
+<body>
+    
+    <header>
+        <a href="#" class="logo">Bryan</a>
+
+        <nav>
+            <a href="#" class="active">HOME</a>
+            <a href="#projects">PROJECTS</a>
+            <a href="#skills">SKILLS</a>
+            <a href="#education">EDUCATION</a>
+            <a href="#contact">CONTACT</a>
+            <a onclick="toggleTheme()" id="theme-toggle"><i class="fa-regular fa-moon"></i></a>
+        </nav>
+    </header>
+
+    <section class="home">
+
+        <div class="interactive-portrait" id="portrait">
+            <!-- Default / Center Image -->
+            <img src="image/default.png" class="img active" id="img-mc" alt="Center">
+
+            <!-- The 8 Directional Images -->
+            <img src="image/top-left.png"   class="img" id="img-tl" alt="Top Left">
+            <img src="image/top-center.png" class="img" id="img-tc" alt="Top Center">
+            <img src="image/top-right.png"  class="img" id="img-tr" alt="Top Right">
+            
+            <img src="image/left.png"   class="img" id="img-ml" alt="Mid Left">
+            <img src="image/right.png"  class="img" id="img-mr" alt="Mid Right">
+            
+            <img src="image/bot-left.png"   class="img" id="img-bl" alt="Bottom Left">
+            <img src="image/bot-center.png" class="img" id="img-bc" alt="Bottom Center">
+            <img src="image/bot-right.png"  class="img" id="img-br" alt="Bottom Right">
+        </div>
+
+        <div class="home-content">
+            <h1>
+                Hi, it's <span>Bryan</span>
+            </h1>
+            <h3 class="typing-text">
+                I'm a <span></span>
+            </h3>
+            <p>
+                Bachelor of Science in Information Technology 
+                <span>SLSU - Campus</span> 
+            </p>
+
+            <div class="social-icons">
+                <a href="" class="fa-brands fa-linkedin" target="_blank"></a>
+                <a href="" class="fa-brands fa-github" target="_blank"></a>
+                <a href="" class="fa-brands fa-twitter" target="_blank"></a>
+                <a href="" class="fa-brands fa-instagram" target="_blank"></a>
+            </div>
+            
+            <a href="#contact" class="btn">Hire me</a>
+        </div>
+    </section>
+
+    <section id="projects">
+
+            <div class="projects-container">
+
+                <h1>
+                    My <span>Projects</span>
+                </h1>
+
+                <p class="projects-description">
+                    Here are some of the projects I have created
+                    while learning and developing my skills.
+                </p>
+
+
+                <!-- PROJECT CARDS -->
+
+                <div class="project-grid">
+
+
+                    <!-- PROJECT 1 -->
+
+                    <div class="project-card">
+
+                        <div class="project-image">
+                            <img
+                                src="image/Porfolio-project.png"
+                                alt="Project 1 preview"
+                            >
+                        </div>
+
+                        <div class="project-content">
+
+                            <h2>
+                                Portfolio Website
+                            </h2>
+
+                            <p>
+                                A personal portfolio website built
+                                using HTML and CSS to showcase my
+                                skills, projects, and experience.
+                            </p>
+
+                            <div class="project-tech">
+                                <span>HTML</span>
+                                <span>CSS</span>
+                            </div>
+
+                            <div class="project-links">
+
+                                <a href="#" class="btn">
+                                    Live Demo
+                                </a>
+
+                                <a href="#" class="project-github">
+                                    <i class="fa-brands fa-github"></i>
+                                    GitHub
+                                </a>
+
+                            </div>
+
+                        </div>
+
+                    </div>
+
+
+                    <!-- PROJECT 2 -->
+
+                    <div class="project-card">
+
+                        <div class="project-image">
+                            <img
+                                src="image/Porfolio-project.png"
+                                alt="Project 2 preview"
+                            >
+                        </div>
+
+                        <div class="project-content">
+
+                            <h2>
+                                JavaScript Game
+                            </h2>
+
+                            <p>
+                                A simple interactive game created
+                                with JavaScript while practicing
+                                DOM manipulation and programming logic.
+                            </p>
+
+                            <div class="project-tech">
+                                <span>HTML</span>
+                                <span>CSS</span>
+                                <span>JavaScript</span>
+                            </div>
+
+                            <div class="project-links">
+
+                                <a href="#" class="btn">
+                                    Live Demo
+                                </a>
+
+                                <a href="#" class="project-github">
+                                    <i class="fa-brands fa-github"></i>
+                                    GitHub
+                                </a>
+
+                            </div>
+
+                        </div>
+
+                    </div>
+
+
+                    <!-- PROJECT 3 -->
+
+                    <div class="project-card">
+
+                        <div class="project-image">
+                            <img
+                                src="image/Porfolio-project.png"
+                                alt="Project 3 preview"
+                            >
+                        </div>
+
+                        <div class="project-content">
+
+                            <h2>
+                                Inventory System
+                            </h2>
+
+                            <p>
+                                A web-based inventory project designed
+                                to manage products, records, and
+                                basic inventory operations.
+                            </p>
+
+                            <div class="project-tech">
+                                <span>HTML</span>
+                                <span>CSS</span>
+                                <span>JavaScript</span>
+                                <span>PHP</span>
+                                <span>MySQL</span>
+                            </div>
+
+                            <div class="project-links">
+
+                                <a href="#" class="btn">
+                                    View Project
+                                </a>
+
+                                <a href="#" class="project-github">
+                                    <i class="fa-brands fa-github"></i>
+                                    GitHub
+                                </a>
+
+                            </div>
+
+                        </div>
+
+                    </div>
+
+
+                </div>
+
+            </div>
+
+    </section>
+
+    <section id="skills">
+
+            <div class="skills-container">
+
+                <h1>
+                    My <span>Skills</span>
+                </h1>
+
+                <p class="skills-description">
+                    Here are some of the technical skills and tools
+                    I have learned and practiced.
+                </p>
+
+
+                <!-- ================= SKILL GRID ================= -->
+
+                <div class="skills-grid">
+
+
+                    <!-- FRONTEND -->
+
+                    <div class="skill-card">
+
+                        <div class="skill-icon">
+                            <i class="fa-solid fa-code"></i>
+                        </div>
+
+                        <h2>Frontend Development</h2>
+
+                        <p>
+                            Building responsive and user-friendly
+                            websites using modern frontend technologies.
+                        </p>
+
+                        <div class="skill-list">
+
+                            <span>
+                                <i class="fa-brands fa-html5"></i>
+                                HTML
+                            </span>
+
+                            <span>
+                                <i class="fa-brands fa-css3-alt"></i>
+                                CSS
+                            </span>
+
+                            <span>
+                                <i class="fa-brands fa-js"></i>
+                                JavaScript
+                            </span>
+
+                        </div>
+
+                    </div>
+
+
+                    <!-- BACKEND -->
+
+                    <div class="skill-card">
+
+                        <div class="skill-icon">
+                            <i class="fa-solid fa-server"></i>
+                        </div>
+
+                        <h2>Backend Development</h2>
+
+                        <p>
+                            Working with server-side programming,
+                            databases, and CRUD-based applications.
+                        </p>
+
+                        <div class="skill-list">
+
+                            <span>
+                                <i class="fa-brands fa-php"></i>
+                                PHP
+                            </span>
+
+                            <span>
+                                <i class="fa-brands fa-laravel"></i>
+                                Laravel
+                            </span>
+
+                            <span>
+                                <i class="fa-solid fa-database"></i>
+                                MySQL
+                            </span>
+
+                        </div>
+
+                    </div>
+
+
+                    <!-- TOOLS -->
+
+                    <div class="skill-card">
+
+                        <div class="skill-icon">
+                            <i class="fa-solid fa-screwdriver-wrench"></i>
+                        </div>
+
+                        <h2>Tools & Technologies</h2>
+
+                        <p>
+                            Familiar with development tools and
+                            platforms used during web development.
+                        </p>
+
+                        <div class="skill-list">
+
+                            <span>
+                                <i class="fa-brands fa-git-alt"></i>
+                                Git
+                            </span>
+
+                            <span>
+                                <i class="fa-brands fa-github"></i>
+                                GitHub
+                            </span>
+
+                            <span>
+                                <i class="fa-solid fa-code"></i>
+                                VS Code
+                            </span>
+
+                        </div>
+
+                    </div>
+
+
+                    <!-- OTHER SKILLS -->
+
+                    <div class="skill-card">
+
+                        <div class="skill-icon">
+                            <i class="fa-solid fa-laptop-code"></i>
+                        </div>
+
+                        <h2>Other Skills</h2>
+
+                        <p>
+                            Additional skills that support my work
+                            and productivity.
+                        </p>
+
+                        <div class="skill-list">
+
+                            <span>
+                                <i class="fa-solid fa-file-excel"></i>
+                                MS Office
+                            </span>
+
+                            <span>
+                                <i class="fa-solid fa-keyboard"></i>
+                                Fast Typing
+                            </span>
+
+                            <span>
+                                <i class="fa-solid fa-comments"></i>
+                                Communication
+                            </span>
+
+                        </div>
+
+                    </div>
+
+
+                </div>
+
+            </div>
+
+    </section>
+
+    <section id="education">
+
+            <div class="education-container">
+
+                <h1>
+                    My <span>Education</span>
+                </h1>
+
+                <p class="education-description">
+                    My academic background and educational journey
+                    in Information Technology.
+                </p>
+
+
+                <!-- ================= EDUCATION TIMELINE ================= -->
+
+                <div class="education-timeline">
+
+
+                    <!-- EDUCATION ITEM 1 -->
+
+                    <div class="education-item">
+
+                        <div class="education-icon">
+                            <i class="fa-solid fa-graduation-cap"></i>
+                        </div>
+
+                        <div class="education-card">
+
+                            <span class="education-year">
+                                2018 - 2026
+                            </span>
+
+                            <h2>
+                                Bachelor of Science in Information Technology
+                            </h2>
+
+                            <h3>
+                                Southern Leyte State University
+                            </h3>
+
+                            <p>
+                                Studied programming, web development,
+                                databases, software development, and
+                                information technology concepts.
+                            </p>
+
+                        </div>
+
+                    </div>
+
+
+                    <!-- EDUCATION ITEM 2 -->
+
+                    <div class="education-item">
+
+                        <div class="education-icon">
+                            <i class="fa-solid fa-school"></i>
+                        </div>
+
+                        <div class="education-card">
+
+                            <span class="education-year">
+                                2013 - 2014
+                            </span>
+
+                            <h2>
+                                High School
+                            </h2>
+
+                            <h3>
+                                Sta Cruz Nation High School
+                            </h3>
+
+                            <p>
+                                Developed an interest in computers,
+                                technology, programming, and
+                                information systems.
+                            </p>
+
+                        </div>
+
+                    </div>
+
+
+                    <!-- EDUCATION ITEM 3 -->
+
+                    <div class="education-item">
+
+                        <div class="education-icon">
+                            <i class="fa-solid fa-book"></i>
+                        </div>
+
+                        <div class="education-card">
+
+                            <span class="education-year">
+                                2008 - 2009
+                            </span>
+
+                            <h2>
+                                Elementary School
+                            </h2>
+
+                            <h3>
+                                Sta Cruz Elementary School
+                            </h3>
+
+                            <p>
+                                Built a foundation in communication,
+                                mathematics, problem-solving, and
+                                general education.
+                            </p>
+
+                        </div>
+
+                    </div>
+
+
+                </div>
+
+            </div>
+
+    </section>
+
+    <!-- Contact Section -->
+    <section id="contact">
+
+        <div class="contact-content">
+
+            <h1>Contact <span>Me</span></h1>
+
+            <p>
+                Have a project, opportunity, or question?
+                Feel free to get in touch with me.
+            </p>
+
+
+            <!-- Contact Information -->
+            <div class="contact-info">
+
+                <div class="contact-item">
+                    <i class="fa-solid fa-envelope"></i>
+
+                    <div>
+                        <h3>Email</h3>
+                        <p>brian.yserio@gmail.com</p>
+                    </div>
+                </div>
+
+
+                <div class="contact-item">
+                    <i class="fa-solid fa-phone"></i>
+
+                    <div>
+                        <h3>Phone</h3>
+                        <p>+63 994 889 5062</p>
+                    </div>
+                </div>
+
+
+                <div class="contact-item">
+                    <i class="fa-solid fa-location-dot"></i>
+
+                    <div>
+                        <h3>Location</h3>
+                        <p>Philippines</p>
+                    </div>
+                </div>
+
+            </div>
+
+        </div>
+
+
+        <!-- Contact Form -->
+        <form action="https://api.web3forms.com/submit" class="contact-form" id="form" method="POST">
+
+            <div class="input-box">
+
+                <input type="hidden" name="access_key" value="fe105696-5c82-417e-8a53-a72b9ff43329">
+
+                <input type="text"
+                       name="name"
+                       placeholder="Your Name"
+                       required>
+
+                <input type="email"
+                       name="email"
+                       placeholder="Your Email"
+                       required>
+
+            </div>
+
+
+            <div class="input-box">
+
+                <input type="text"
+                       name="subject"
+                       placeholder="Subject"
+                       required>
+
+            </div>
+
+
+            <textarea
+                name="message"
+                rows="8"
+                placeholder="Your Message"
+                required></textarea>
+
+
+            <button type="submit" class="btn">
+                Send Message
+            </button>
+
+        </form>
+
+    </section>
+
+    <script src="js/script.js"></script>
+    <script src="js/contact.js"></script>
+    <script src="js/interactive-profile.js"></script>
+</body>
+
+</html>

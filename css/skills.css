@@ -1,0 +1,343 @@
+/* =================================================
+   GOOGLE FONTS
+================================================= */
+
+@import url('https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100..900;1,100..900&display=swap');
+
+@import url('https://fonts.googleapis.com/css2?family=Caacupe+One&display=swap');
+
+
+/* =================================================
+   RESET
+================================================= */
+
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+    text-decoration: none;
+    list-style: none;
+    outline: none;
+    border: none;
+    font-family: "Caacupe One", sans-serif;
+}
+
+
+/* =================================================
+   HTML
+================================================= */
+
+html {
+    font-size: 62.5%;
+}
+
+
+/* =================================================
+   BODY
+================================================= */
+
+body {
+    width: 100%;
+    min-height: 100vh; /* At least the height of the screen, but it can become taller.*/
+    overflow-x: hidden;
+    background: linear-gradient(
+        135deg,
+        #232325 0%,
+        #5A5A5C 50%,
+        #232325 100%
+    );
+
+    color: white;
+}
+
+
+/* =================================================
+   HEADER
+================================================= */
+
+header {
+    margin-top: 2rem;
+
+    position: fixed;
+
+    top: 0;
+    left: 0;
+
+    width: 100%;
+
+    padding: 1rem 9%;
+
+    background-color: transparent;
+
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+
+    z-index: 100;
+}
+
+
+.logo {
+    font-size: 3rem;
+
+    color: #55E07E;
+
+    font-weight: 800;
+
+    cursor: pointer;
+
+    transition: 0.3s ease;
+}
+
+
+.logo:hover {
+    color: #EEEEEE;
+
+    transform: scale(1.1);
+}
+
+
+nav a {
+    font-size: 1.8rem;
+
+    color: #55E07E;
+
+    margin-left: 4rem;
+
+    font-weight: 300;
+
+    transition: 0.3s ease;
+}
+
+
+nav a:hover,
+nav a.active {
+    color: #EEEEEE;
+
+    border-bottom: 1px solid #EEEEEE;
+}
+
+main {
+    width: 100%;
+    min-width: 100vh;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 12rem 9% 5rem;
+}
+
+/* =================================================
+   SKILLS
+================================================= */
+
+.skills {
+    display: flex;
+
+    justify-content: center;
+    align-items: center;
+}
+
+
+.skills-container {
+    width: 100%;
+    max-width: 1200px;
+
+    text-align: center;
+}
+
+
+/* =================================================
+   SKILLS TITLE
+================================================= */
+
+.skills-container h1 {
+    font-size: 6rem;
+
+    line-height: 1;
+
+    margin-bottom: 0.5rem;
+}
+
+
+.skills-container h1 span {
+    color: #55E07E;
+}
+
+
+/* =================================================
+   DESCRIPTION
+================================================= */
+
+.skills-description {
+    max-width: 650px;
+
+    margin: 0 auto 5rem;
+
+    font-size: 1.8rem;
+
+    line-height: 1.6;
+
+    color: #dddddd;
+}
+
+
+/* =================================================
+   SKILLS GRID
+================================================= */
+
+.skills-grid {
+    display: grid;
+
+    grid-template-columns: repeat(2, 1fr);
+
+    gap: 3rem;
+}
+
+
+/* =================================================
+   SKILL CARD
+================================================= */
+
+.skill-card {
+    padding: 3rem;
+
+    background: rgba(0, 0, 0, 0.25);
+
+    border: 1px solid rgba(85, 224, 126, 0.25);
+
+    border-radius: 2rem;
+
+    text-align: left;
+
+    transition: 0.3s ease;
+}
+
+
+.skill-card:hover {
+    transform: translateY(-8px);
+
+    border-color: #55E07E;
+
+    box-shadow:
+        0 0 0 2px rgba(85, 224, 126, 0.1),
+        0 0 20px rgba(85, 224, 126, 0.2);
+}
+
+
+/* =================================================
+   SKILL ICON
+================================================= */
+
+.skill-icon {
+    width: 5rem;
+    height: 5rem;
+
+    display: flex;
+
+    justify-content: center;
+    align-items: center;
+
+    margin-bottom: 2rem;
+
+    border: 2px solid #55E07E;
+
+    border-radius: 50%;
+
+    color: #55E07E;
+
+    font-size: 2.2rem;
+}
+
+
+/* =================================================
+   SKILL CARD CONTENT
+================================================= */
+
+.skill-card h2 {
+    font-size: 2.4rem;
+
+    margin-bottom: 1rem;
+}
+
+
+.skill-card p {
+    font-size: 1.6rem;
+
+    line-height: 1.6;
+
+    color: #dddddd;
+
+    margin-bottom: 2rem;
+}
+
+
+/* =================================================
+   SKILL LIST
+================================================= */
+
+.skill-list {
+    display: flex;
+
+    flex-wrap: wrap;
+
+    gap: 1rem;
+}
+
+
+.skill-list span {
+    display: flex;
+
+    align-items: center;
+
+    gap: 0.7rem;
+
+    padding: 0.7rem 1.2rem;
+
+    border: 1px solid #55E07E;
+
+    border-radius: 2rem;
+
+    color: #55E07E;
+
+    font-size: 1.4rem;
+}
+
+
+.skill-list i {
+    font-size: 1.5rem;
+}
+
+
+/* =================================================
+   RESPONSIVE
+================================================= */
+
+@media (max-width: 995px) {
+
+    .skills {
+        padding: 12rem 5% 5rem;
+    }
+
+    .skills-grid {
+        grid-template-columns: 1fr;
+    }
+
+}
+
+
+@media (max-width: 600px) {
+
+    html {
+        font-size: 55%;
+    }
+
+    .skills-container h1 {
+        font-size: 4.5rem;
+    }
+
+    .skill-card {
+        padding: 2.5rem;
+    }
+
+}

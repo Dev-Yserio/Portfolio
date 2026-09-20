@@ -1,0 +1,881 @@
+@import url('https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100..900;1,100..900&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Caacupe+One&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Pixelify+Sans:wght@400..700&display=swap');
+
+/* =================================================
+   DESIGN TOKENS
+   (centralizing these makes future re-theming a
+   one-line change instead of a find-and-replace)
+================================================= */
+:root {
+    --color-bg-dark: #111413;
+    --color-bg-mid: #232927;
+    --color-bg-card: #232325;
+    --color-accent: #55E07E;
+    --color-text: #ffffff;
+    --color-text-light: #EEEEEE;
+    --color-text-dim: #dddddd;
+    --color-dark: #111;
+
+    --transition-fast: 0.15s ease;
+    --transition-base: 0.3s ease;
+
+    --glow-shadow:
+        0 0 0 3px rgba(85, 224, 126, 0.15),
+        0 0 15px rgba(85, 224, 126, 0.5),
+        0 0 30px rgba(85, 224, 126, 0.25);
+
+    --glow-shadow-soft:
+        0 0 0 2px rgba(85, 224, 126, 0.1),
+        0 0 20px rgba(85, 224, 126, 0.2);
+}
+
+* {
+    box-sizing: border-box; /* remove the default box sizing */
+    margin: 0; /* remove the browser default margin */
+    text-decoration: none; /* remove the default underline links */
+    border: none; /* remove default border */
+    outline: none; /* remove default outline */
+    list-style: none; /* remove default bullets/numbers from lists */
+    font-family: "Pixelify Sans", sans-serif; /* set the default font */
+    font-optical-sizing: auto;
+}
+
+html {
+    scroll-behavior: smooth;
+    font-size: 62.5%; /* 1rem = 10px, 2rem = 20px, 3rem = 30px, etc. */
+}
+
+body {
+    width: 100%;
+    min-height: 100vh;
+    overflow-x: hidden;
+    background: linear-gradient(135deg, var(--color-bg-dark) 0%, var(--color-bg-mid) 50%, var(--color-bg-dark) 100%);
+    color: var(--color-text);
+}
+
+body::before {
+    content: "";
+    position: fixed;
+    inset: 0;
+    background-color: #E8F9FF;
+    opacity: 0;
+    transition: opacity 0.8s ease;
+    z-index: -1;
+}
+
+body.light-mode {
+    color: #092328;
+}
+
+body.light-mode::before {
+    opacity: 1;
+}
+
+body.light-mode nav a,
+body.light-mode .logo,
+body.light-mode .social-icons a::before,
+body.light-mode .btn,
+body.light-mode .projects-description {
+    color: #165823;
+}
+
+body.light-mode nav a:hover {
+    border-bottom: 1px solid var(--color-bg-dark);
+}
+
+body.light-mode .project-content {
+    height: 100%;
+    background-color: #55E07E;
+}
+
+body.light-mode .project-content h2,
+body.light-mode .project-content p {
+    color: white;
+}
+
+body.light-mode .project-tech span {
+    color: white;
+    background-color: none;
+    border: 1px solid #111;
+}
+
+/* Global accent color used for <span> highlights everywhere */
+span {
+    color: var(--color-accent);
+}
+
+/* =================================================
+   HEADER / NAV
+================================================= */
+
+header {
+    margin-top: 20px;
+    position: fixed; /* stays attached to the viewport */
+    top: 0;
+    left: 0;
+    width: 100%;
+    padding: 1rem 4%;
+    background-color: transparent;
+    filter: drop-shadow(10px);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    z-index: 100;
+}
+
+.logo {
+    font-size: 5rem;
+    color: var(--color-accent);
+    font-weight: 800;
+    cursor: pointer;
+    transition: var(--transition-fast);
+}
+
+.logo:hover {
+    color: var(--color-text-light);
+    transform: scale(1.1); /* 10% larger */
+}
+
+nav a {
+    font-size: 1.8rem;
+    color: var(--color-accent);
+    margin-left: 4rem;
+    font-weight: 300;
+    transition: var(--transition-fast);
+}
+
+nav a:hover,
+nav a:active {
+    color: var(--color-text-light);
+    border-bottom: 1px solid var(--color-text-light);
+}
+
+@media (max-width: 995px) {
+    /* Fixed: this rule previously had a malformed value
+       "rgba(0, 0, 0, 0, 1)" (4 numbers instead of 3) which
+       is invalid and gets dropped by the browser. */
+    nav {
+        position: absolute;
+        top: 100%;
+        right: 0;
+        width: 40%;
+        border-left: 1px solid var(--color-accent);
+        border-bottom: 1px solid var(--color-accent);
+        border-bottom-left-radius: 2rem;
+        padding: 1rem;
+        background-color: #161616;
+        border-top: 0.1rem solid rgba(0, 0, 0, 1);
+    }
+
+    nav.active {
+        display: block;
+    }
+
+    nav a {
+        display: block;
+        font-size: 2rem;
+        margin: 3rem 0;
+    }
+
+    /* Intentionally overrides the desktop hover style above
+       (thicker accent-colored underline + padding) for the
+       mobile dropdown menu. */
+    nav a:hover,
+    nav a:active {
+        padding: 1rem;
+        border-radius: 0.5rem;
+        border-bottom: 0.5rem solid var(--color-accent);
+    }
+}
+
+/* =================================================
+   HOME / HERO
+================================================= */
+
+.home {
+    min-height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 8rem;
+    padding: 10rem 9% 5rem;
+    background: transparent;
+}
+
+.interactive-portrait {
+    position: relative;
+    width: 300px;
+    height: 300px;
+}
+
+.img {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+                
+    opacity: 0;
+    transition: opacity 0.15s ease; /* Fast, smooth crossfade */
+}
+
+/* The JS will apply this class to the correct image */
+.img.active {
+    opacity: 1;
+}
+
+.home-content h1 {
+    font-size: 4rem;
+    font-weight: 700;
+    line-height: 1.3;
+    margin-bottom: 1rem;
+}
+
+.home-img img {
+    position: relative;
+    width: 40vw;
+    border-bottom-right-radius: 30%;
+    cursor: pointer;
+    transition: var(--transition-base);
+}
+
+.home-img img:hover {
+    transform: scale(1.1);
+}
+
+.social-icons a {
+    display: inline-flex;
+    justify-content: center;
+    align-items: center;
+    width: 4rem;
+    height: 4rem;
+    background-color: transparent;
+    border: 0.2rem solid var(--color-accent);
+    font-size: 2rem;
+    border-radius: 50%;
+    margin: 3rem 1.5rem 3rem 0;
+    transition: var(--transition-base);
+    color: var(--color-text);
+}
+
+.social-icons a:hover {
+    color: var(--color-dark);
+    background-color: var(--color-accent);
+    transform: translateY(-4px) scale(1.1);
+    box-shadow: var(--glow-shadow);
+}
+
+/* =================================================
+   BUTTONS
+================================================= */
+
+.btn {
+    display: inline-block;
+    padding: 1rem 2.8rem;
+    background-color: transparent;
+    border-radius: 4rem;
+    font-size: 1.6rem;
+    color: var(--color-text);
+    letter-spacing: 0.3rem;
+    font-weight: 600;
+    border: 2px solid var(--color-accent);
+    transition: var(--transition-base);
+    cursor: pointer;
+}
+
+.btn:hover,
+.btn:active {
+    transform: scale(1.03);
+    background-color: var(--color-accent);
+    color: var(--color-dark);
+    opacity: 0.8;
+    box-shadow: var(--glow-shadow);
+}
+
+/* =================================================
+   TYPING ANIMATION
+================================================= */
+
+.typing-text {
+    font-size: 34px;
+    font-weight: 600;
+    min-width: 280px;
+}
+
+.typing-text span {
+    position: relative;
+}
+
+.typing-text span::before {
+    content: "Web Developer";
+    color: var(--color-accent);
+    animation: words 20s infinite;
+}
+
+.typing-text span::after {
+    content: "";
+    background-color: transparent;
+    position: absolute;
+    width: calc(100% + 8px);
+    height: 100%;
+    border-left: 3px solid var(--color-accent);
+    right: -8px;
+    animation: cursor 0.6s infinite;
+}
+
+@keyframes cursor {
+    50% {
+        border-left: 3px solid transparent;
+    }
+}
+
+@keyframes words {
+    0%, 50% {
+        content: "Web Developer";
+    }
+    51%, 100% {
+        content: "Vibe Coder";
+    }
+}
+
+/* =================================================
+   SHARED SECTION / CONTAINER / CARD PATTERNS
+   (projects, skills, and education all repeat the
+   same "big heading + intro paragraph + hover card"
+   pattern, so the common parts are grouped once here
+   and each section only overrides what's different)
+================================================= */
+
+#projects,
+#skills,
+#education {
+    min-height: 100vh;
+    padding: 10rem 9% 5rem;
+    background: transparent;
+}
+
+.projects-container h1,
+.skills-container h1,
+.education-container h1 {
+    font-size: 6rem;
+    line-height: 1.2;
+    margin-bottom: 1.5rem;
+}
+
+.projects-description,
+.skills-description,
+.education-description {
+    max-width: 650px;
+    margin: 0 auto 4rem;
+    font-size: 1.8rem;
+    line-height: 1.6;
+    color: var(--color-text-dim);
+}
+
+.project-card,
+.skill-card,
+.education-card {
+    background: rgba(0, 0, 0, 0.25);
+    border: 1px solid rgba(85, 224, 126, 0.25);
+    border-radius: 2rem;
+    transition: var(--transition-base);
+}
+
+.project-card:hover,
+.skill-card:hover,
+.education-card:hover {
+    border-color: var(--color-accent);
+    box-shadow: var(--glow-shadow-soft);
+}
+
+/* =================================================
+   PROJECTS
+================================================= */
+
+.projects-container {
+    width: 100%;
+    max-width: 1200px;
+    text-align: center;
+}
+
+.project-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 3rem;
+}
+
+.project-card {
+    overflow: hidden;
+    text-align: left;
+}
+
+.project-card:hover {
+    transform: translateY(-8px);
+}
+
+.project-image {
+    width: 100%;
+    height: 200px;
+    overflow: hidden;
+}
+
+.project-image img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+    transition: var(--transition-base);
+}
+
+.project-card:hover .project-image img {
+    transform: scale(1.05);
+}
+
+.project-content {
+    padding: 2.5rem;
+}
+
+.project-content h2 {
+    font-size: 2.4rem;
+    margin-bottom: 1rem;
+    color: var(--color-text);
+}
+
+.project-content p {
+    width: 100%;
+    font-size: 1.6rem;
+    line-height: 1.6;
+    color: var(--color-text-dim);
+    margin-bottom: 2rem;
+}
+
+.project-tech {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.8rem;
+    margin-bottom: 2rem;
+}
+
+.project-tech span {
+    padding: 0.5rem 1rem;
+    border: 1px solid var(--color-accent);
+    border-radius: 2rem;
+    color: var(--color-accent);
+    font-size: 1.3rem;
+}
+
+.project-links {
+    display: flex;
+    align-items: center;
+    gap: 2rem;
+    flex-wrap: wrap;
+}
+
+.project-links a {
+    color: var(--color-accent);
+    font-size: 1.4rem;
+    cursor: pointer;
+    transition: var(--transition-base);
+}
+
+.project-links a:hover {
+    color: var(--color-text);
+    transform: translateY(-2px);
+}
+
+.project-links .btn {
+    text-decoration: none;
+    padding: 0.8rem 1.5rem;
+    border: 1px solid var(--color-accent);
+    border-radius: 2rem;
+}
+
+.project-links .btn:hover {
+    background-color: var(--color-accent);
+    color: var(--color-dark);
+}
+
+@media (max-width: 995px) {
+    .project-grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+}
+
+@media (max-width: 600px) {
+    html {
+        font-size: 55%;
+    }
+
+    main {
+        padding: 12rem 5% 5rem;
+    }
+
+    .projects-container h1 {
+        font-size: 4.5rem;
+    }
+
+    .project-grid {
+        grid-template-columns: 1fr;
+    }
+}
+
+/* =================================================
+   SKILLS
+================================================= */
+
+.skills-container {
+    width: 100%;
+    max-width: 1200px;
+    text-align: center;
+}
+
+.skills-container h1 {
+    line-height: 1;
+    margin-bottom: 0.5rem;
+}
+
+.skills-description {
+    margin-bottom: 5rem;
+}
+
+.skills-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 3rem;
+}
+
+.skill-card {
+    padding: 3rem;
+    text-align: left;
+}
+
+.skill-card:hover {
+    transform: translateY(-8px);
+}
+
+.skill-icon {
+    width: 5rem;
+    height: 5rem;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-bottom: 2rem;
+    border: 2px solid var(--color-accent);
+    border-radius: 50%;
+    color: var(--color-accent);
+    font-size: 2.2rem;
+}
+
+.skill-card h2 {
+    font-size: 2.4rem;
+    margin-bottom: 1rem;
+}
+
+.skill-card p {
+    font-size: 1.6rem;
+    line-height: 1.6;
+    color: var(--color-text-dim);
+    margin-bottom: 2rem;
+}
+
+.skill-list {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 1rem;
+}
+
+.skill-list span {
+    display: flex;
+    align-items: center;
+    gap: 0.7rem;
+    padding: 0.7rem 1.2rem;
+    border: 1px solid var(--color-accent);
+    border-radius: 2rem;
+    color: var(--color-accent);
+    font-size: 1.4rem;
+}
+
+.skill-list i {
+    font-size: 1.5rem;
+}
+
+@media (max-width: 995px) {
+    /* Fixed: previously targeted ".skills", but the section in
+       the markup is "#skills" — this rule was dead code and
+       never applied. */
+    #skills {
+        padding: 12rem 5% 5rem;
+    }
+
+    .skills-grid {
+        grid-template-columns: 1fr;
+    }
+}
+
+@media (max-width: 600px) {
+    html {
+        font-size: 55%;
+    }
+
+    .skills-container h1 {
+        font-size: 4.5rem;
+    }
+
+    .skill-card {
+        padding: 2.5rem;
+    }
+}
+
+/* =================================================
+   EDUCATION
+================================================= */
+
+.education-container {
+    width: 100%;
+    max-width: 1000px;
+    text-align: center;
+}
+
+.education-description {
+    margin-bottom: 5rem;
+}
+
+.education-timeline {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    gap: 3rem;
+}
+
+.education-timeline::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: 3rem;
+    width: 2px;
+    background-color: var(--color-accent);
+}
+
+.education-item {
+    position: relative;
+    display: flex;
+    align-items: flex-start;
+    gap: 2rem;
+    text-align: left;
+}
+
+.education-icon {
+    position: relative;
+    flex-shrink: 0;
+    width: 6rem;
+    height: 6rem;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: var(--color-bg-card);
+    border: 2px solid var(--color-accent);
+    border-radius: 50%;
+    color: var(--color-accent);
+    font-size: 2.2rem;
+    z-index: 1;
+}
+
+.education-card {
+    flex: 1;
+    padding: 2.5rem;
+}
+
+.education-card:hover {
+    transform: translateY(-5px);
+}
+
+.education-year {
+    display: inline-block;
+    margin-bottom: 1rem;
+    color: var(--color-accent);
+    font-size: 1.4rem;
+    font-weight: 600;
+}
+
+.education-card h2 {
+    font-size: 2.4rem;
+    margin-bottom: 0.8rem;
+}
+
+.education-card h3 {
+    font-size: 1.7rem;
+    color: var(--color-accent);
+    margin-bottom: 1.5rem;
+}
+
+.education-card p {
+    font-size: 1.6rem;
+    line-height: 1.6;
+    color: var(--color-text-dim);
+}
+
+@media (max-width: 995px) {
+    /* Fixed: previously targeted ".education", but the section in
+       the markup is "#education" — this rule was dead code and
+       never applied. */
+    #education {
+        padding: 12rem 5% 5rem;
+    }
+
+    .education-container {
+        max-width: 800px;
+    }
+}
+
+@media (max-width: 600px) {
+    html {
+        font-size: 55%;
+    }
+
+    .education-container h1 {
+        font-size: 4.5rem;
+    }
+
+    .education-timeline::before {
+        left: 2.5rem;
+    }
+
+    .education-icon {
+        width: 5rem;
+        height: 5rem;
+    }
+
+    .education-item {
+        gap: 1.5rem;
+    }
+
+    .education-card {
+        padding: 2rem;
+    }
+
+    .education-card h2 {
+        font-size: 2rem;
+    }
+}
+
+/* =================================================
+   CONTACT
+================================================= */
+
+#contact {
+    min-height: 100vh;
+    padding: 10rem 9% 5rem;
+    background: transparent;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 8rem;
+}
+
+.contact-content {
+    max-width: 500px;
+}
+
+.contact-content h1 {
+    font-size: 6rem;
+    font-weight: 600;
+    line-height: 1.2;
+    margin-bottom: 2rem;
+}
+
+.contact-content p {
+    font-size: 1.8rem;
+    line-height: 1.6;
+    color: var(--color-text-dim);
+}
+
+.contact-info {
+    margin-top: 3rem;
+}
+
+.contact-item {
+    display: flex;
+    align-items: center;
+    gap: 2rem;
+    margin-bottom: 2.5rem;
+}
+
+.contact-item i {
+    width: 5rem;
+    height: 5rem;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border: 2px solid var(--color-text);
+    border-radius: 50%;
+    color: var(--color-text);
+    font-size: 2rem;
+    transition: var(--transition-base); /* was missing, so the hover below used to snap instantly */
+}
+
+.contact-item i:hover {
+    color: var(--color-dark);
+    background-color: var(--color-accent);
+    transform: translateY(-4px) scale(1.1);
+    box-shadow: var(--glow-shadow);
+}
+
+.contact-item h3 {
+    font-size: 1.8rem;
+    margin-bottom: 0.5rem;
+}
+
+.contact-item p {
+    font-size: 1.5rem;
+}
+
+.contact-form {
+    width: 100%;
+    max-width: 550px;
+    padding: 3rem;
+    background: rgba(0, 0, 0, 0.25);
+    border: 1px solid rgba(85, 224, 126, 0.3);
+    border-radius: 2rem;
+}
+
+.input-box {
+    display: flex;
+    gap: 1.5rem;
+    margin-bottom: 1.5rem;
+}
+
+.input-box input,
+.contact-form textarea {
+    width: 100%;
+    padding: 1.2rem;
+    background: var(--color-bg-card);
+    border: 1px solid #666;
+    border-radius: 1rem;
+    color: var(--color-text);
+    font-size: 1.6rem;
+    transition: var(--transition-base);
+}
+
+.contact-form textarea {
+    resize: vertical;
+    min-height: 180px;
+    margin-bottom: 1.5rem;
+}
+
+.input-box input:focus,
+.contact-form textarea:focus {
+    border-color: var(--color-accent);
+    box-shadow:
+        0 0 0 2px rgba(85, 224, 126, 0.15),
+        0 0 15px rgba(85, 224, 126, 0.2);
+}
+
+.contact-form .btn {
+    width: 100%;
+    padding: 10px;
+    text-align: center;
+    border-radius: 20px;
+}

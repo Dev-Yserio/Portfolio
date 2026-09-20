@@ -1,0 +1,204 @@
+@import url('https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100..900;1,100..900&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Caacupe+One&display=swap'); 
+
+* {
+    box-sizing: border-box;
+    margin: 0;
+    text-decoration: none;
+    list-style: none;
+    outline: none;
+    border: none;
+    font-family: "Caacupe One", sans-serif;
+}
+
+html {
+    font-size: 62.5%;
+}
+
+body {
+    width: 100%;
+    height: 100vh;
+    overflow: hidden;
+    background: linear-gradient(135deg, #232325 0%, #5A5A5C 50%, #232325 100%);
+    color: white;
+}
+ 
+header {
+    margin-top: 20px;
+    position: fixed; /* This means the header stays attached to the viewport. */
+    top: 0;
+    left: 0;
+    width: 100%;
+    padding: 1rem 9%;
+    background-color: transparent;
+    filter: drop-shadow(10px);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    z-index: 100;
+}
+.logo {
+    font-size: 3rem;
+    color: #55E07E;
+    font-weight: 800;
+    cursor: pointer;
+    transition: 0.15s ease;
+}
+
+.logo:hover {
+    color: #EEEEEE;
+    transform: scale(1.1); /* makes it 10% larger */
+}
+nav a{
+    font-size: 1.8rem;
+    color: #55E07E;
+    margin-left: 4rem;
+    font-weight: 300;
+    transition: 0.15s ease;
+}
+nav a:hover,
+nav a:active {
+    color: #EEEEEE;
+    border-bottom: 1px solid #EEEEEE;
+}
+.contact {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 8rem;
+    padding: 10rem 9% 5rem;
+    background: linear-gradient(135deg, #232325 0%, #5A5A5C 50%, #232325 100%);
+}
+
+.contact-content {
+    max-width: 500px;
+}
+
+.contact-content h1{
+    font-size: 6rem;
+    font-size: 600;
+    line-height: 1.2;
+    margin-bottom: 2rem;
+}
+
+span {
+    color: #55E07E;
+}
+
+.contact-content p {
+    font-size: 1.8rem;
+    line-height: 1.6;
+    color: #dddddd;
+}
+
+.contact-info {
+    margin-top: 3rem;
+}
+
+
+.contact-item {
+    display: flex;
+    align-items: center;
+
+    gap: 2rem;
+    margin-bottom: 2.5rem;
+}
+
+.contact-item i {
+    width: 5rem;
+    height: 5rem;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    border: 2px solid white;
+    border-radius: 50%;
+
+    color: white;
+    font-size: 2rem;
+}
+
+.contact-item i:hover {
+    color: #111;
+    background-color: #55E07E;
+    transform: translateY(-4px) scale(1.1);
+    box-shadow:
+        0 0 0 3px rgba(85, 224, 126, 0.15),
+        0 0 15px rgba(85, 224, 126, 0.5),
+        0 0 30px rgba(85, 224, 126, 0.25);
+}
+
+.contact-item h3 {
+    font-size: 1.8rem;
+    margin-bottom: 0.5rem;
+}
+
+.contact-item p {
+    font-size: 1.5rem;
+}
+
+.contact-form {
+    width: 100%;
+    max-width: 550px;
+
+    padding: 3rem;
+
+    background: rgba(0, 0, 0, 0.25);
+    border: 1px solid rgba(85, 224, 126, 0.3);
+    border-radius: 2rem;
+}
+
+.input-box {
+    display: flex;
+    gap: 1.5rem;
+    margin-bottom: 1.5rem;
+}
+
+.input-box input,
+.contact-form textarea {
+    width: 100%;
+
+    padding: 1.2rem;
+
+    background: #232325;
+    border: 1px solid #666;
+    border-radius: 1rem;
+
+    color: white;
+    font-size: 1.6rem;
+
+    transition: 0.3s ease;
+}
+
+.contact-form textarea {
+    resize: vertical;
+    min-height: 180px;
+    margin-bottom: 1.5rem;
+}
+
+.input-box input:focus,
+.contact-form textarea:focus {
+    border-color: #55E07E;
+
+    box-shadow:
+        0 0 0 2px rgba(85, 224, 126, 0.15),
+        0 0 15px rgba(85, 224, 126, 0.2);
+
+    outline: none;
+}
+
+.contact-form .btn {
+    width: 100%;
+    padding: 10px;
+    text-align: center;
+    background-color: #55E07E;
+    border-radius: 20px;
+    color: white;
+    transition: opacity 0.15s;
+}
+
+.btn:hover, 
+.btn:active {
+    opacity: 0.8;
+}
