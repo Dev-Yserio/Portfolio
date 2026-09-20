@@ -44,11 +44,28 @@
 html {
     scroll-behavior: smooth;
     font-size: 62.5%; /* 1rem = 10px, 2rem = 20px, 3rem = 30px, etc. */
+    -webkit-text-size-adjust: 100%; /* stop iOS from resizing text on rotate */
+    text-size-adjust: 100%;
+}
+
+/* RESPONSIVE: the small-screen root font size used to be repeated
+   inside the projects, skills and education media queries. It now
+   lives here once. */
+@media (max-width: 600px) {
+    html {
+        font-size: 55%;
+    }
+}
+
+/* RESPONSIVE: images can never be wider than their container */
+img {
+    max-width: 100%;
 }
 
 body {
     width: 100%;
     min-height: 100vh;
+    min-height: 100svh; /* accounts for mobile browser toolbars */
     overflow-x: hidden;
     background: linear-gradient(135deg, var(--color-bg-dark) 0%, var(--color-bg-mid) 50%, var(--color-bg-dark) 100%);
     color: var(--color-text);
@@ -125,7 +142,7 @@ header {
 }
 
 .logo {
-    font-size: 5rem;
+    font-size: clamp(3.2rem, 7vw, 5rem); /* was a fixed 5rem, too big on phones */
     color: var(--color-accent);
     font-weight: 800;
     cursor: pointer;
@@ -151,41 +168,100 @@ nav a:active {
     border-bottom: 1px solid var(--color-text-light);
 }
 
+/* Hamburger button. Hidden on desktop, only used if you add
+   <button class="menu-toggle"> to the header (see notes). */
+.menu-toggle {
+    display: none;
+    padding: 0.4rem 1rem;
+    background: transparent;
+    border: 2px solid var(--color-accent);
+    border-radius: 0.8rem;
+    color: var(--color-accent);
+    font-size: 2.8rem;
+    line-height: 1;
+    cursor: pointer;
+}
+
 @media (max-width: 995px) {
-    /* Fixed: this rule previously had a malformed value
-       "rgba(0, 0, 0, 0, 1)" (4 numbers instead of 3) which
-       is invalid and gets dropped by the browser. */
+    /* RESPONSIVE: the nav used to always be visible as a dropdown that
+       covered the page, with no way to hide it. Now the default is a
+       compact, wrapping bar that works with no extra HTML. */
+    header {
+        margin-top: 0;
+        padding: 1.2rem 4%;
+        flex-wrap: wrap;
+        justify-content: center;
+        column-gap: 3rem;
+        row-gap: 0.4rem;
+        background-color: rgba(17, 20, 19, 0.8); /* stops page text showing through the header */
+        -webkit-backdrop-filter: blur(10px);
+        backdrop-filter: blur(10px);
+    }
+
+    body.light-mode header {
+        background-color: rgba(232, 249, 255, 0.85);
+    }
+
     nav {
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: center;
+    }
+
+    nav a {
+        font-size: 1.5rem;
+        margin: 0 1rem;
+    }
+
+    /* ---- Hamburger mode: only kicks in when the header contains
+       a .menu-toggle button, so nothing breaks without it. ---- */
+    header:has(.menu-toggle) {
+        flex-wrap: nowrap;
+        justify-content: space-between;
+    }
+
+    header:has(.menu-toggle) .menu-toggle {
+        display: block;
+    }
+
+    header:has(.menu-toggle) nav {
+        display: none;
         position: absolute;
         top: 100%;
         right: 0;
-        width: 40%;
+        width: min(28rem, 70%);
+        flex-direction: column;
         border-left: 1px solid var(--color-accent);
         border-bottom: 1px solid var(--color-accent);
         border-bottom-left-radius: 2rem;
         padding: 1rem;
         background-color: #161616;
-        border-top: 0.1rem solid rgba(0, 0, 0, 1);
     }
 
-    nav.active {
-        display: block;
+    header:has(.menu-toggle) nav.active {
+        display: flex;
     }
 
-    nav a {
+    header:has(.menu-toggle) nav a {
         display: block;
         font-size: 2rem;
-        margin: 3rem 0;
+        margin: 2rem 0;
     }
 
     /* Intentionally overrides the desktop hover style above
        (thicker accent-colored underline + padding) for the
        mobile dropdown menu. */
-    nav a:hover,
-    nav a:active {
+    header:has(.menu-toggle) nav a:hover,
+    header:has(.menu-toggle) nav a:active {
         padding: 1rem;
         border-radius: 0.5rem;
         border-bottom: 0.5rem solid var(--color-accent);
+    }
+
+    /* RESPONSIVE: dropdown was dark-only, unreadable in light mode */
+    body.light-mode header:has(.menu-toggle) nav {
+        background-color: #E8F9FF;
+        border-color: #165823;
     }
 }
 
@@ -195,6 +271,7 @@ nav a:active {
 
 .home {
     min-height: 100vh;
+    min-height: 100svh;
     display: flex;
     justify-content: center;
     align-items: center;
@@ -205,8 +282,8 @@ nav a:active {
 
 .interactive-portrait {
     position: relative;
-    width: 300px;
-    height: 300px;
+    width: min(300px, 70vw); /* was a fixed 300px */
+    aspect-ratio: 1 / 1;     /* replaces the fixed 300px height */
 }
 
 .img {
@@ -216,7 +293,7 @@ nav a:active {
     width: 100%;
     height: 100%;
     object-fit: cover;
-                
+
     opacity: 0;
     transition: opacity 0.15s ease; /* Fast, smooth crossfade */
 }
@@ -227,7 +304,7 @@ nav a:active {
 }
 
 .home-content h1 {
-    font-size: 4rem;
+    font-size: clamp(3rem, 6vw, 4rem);
     font-weight: 700;
     line-height: 1.3;
     margin-bottom: 1rem;
@@ -267,6 +344,30 @@ nav a:active {
     box-shadow: var(--glow-shadow);
 }
 
+/* RESPONSIVE: the hero had no media query at all, so the text and
+   portrait stayed side by side and squeezed on small screens. */
+@media (max-width: 995px) {
+    .home {
+        flex-direction: column; /* use column-reverse to put the portrait first */
+        gap: 4rem;
+        text-align: center;
+    }
+
+    .home-img img {
+        width: min(70vw, 40rem);
+    }
+
+    .social-icons {
+        display: flex;
+        justify-content: center;
+        flex-wrap: wrap;
+    }
+
+    .social-icons a {
+        margin: 2rem 0.75rem;
+    }
+}
+
 /* =================================================
    BUTTONS
 ================================================= */
@@ -299,9 +400,9 @@ nav a:active {
 ================================================= */
 
 .typing-text {
-    font-size: 34px;
+    font-size: clamp(2.2rem, 5vw, 3.4rem); /* was a fixed 34px */
     font-weight: 600;
-    min-width: 280px;
+    min-width: min(280px, 100%); /* was a fixed 280px, which overflowed narrow phones */
 }
 
 .typing-text span {
@@ -352,14 +453,23 @@ nav a:active {
 #skills,
 #education {
     min-height: 100vh;
+    min-height: 100svh;
     padding: 10rem 9% 5rem;
     background: transparent;
+}
+
+/* RESPONSIVE: these containers have a max-width but had no auto
+   margins, so on wide screens they sat stuck to the left edge. */
+.projects-container,
+.skills-container,
+.education-container {
+    margin-inline: auto;
 }
 
 .projects-container h1,
 .skills-container h1,
 .education-container h1 {
-    font-size: 6rem;
+    font-size: clamp(3.6rem, 9vw, 6rem); /* scales smoothly instead of jumping at breakpoints */
     line-height: 1.2;
     margin-bottom: 1.5rem;
 }
@@ -390,6 +500,20 @@ nav a:active {
     box-shadow: var(--glow-shadow-soft);
 }
 
+/* RESPONSIVE: one shared rule for every section's mobile padding.
+   The larger top padding clears the fixed header. This replaces the
+   old per-section rules, which targeted ".skills" / ".education" /
+   "main" and never matched anything. */
+@media (max-width: 995px) {
+    .home,
+    #projects,
+    #skills,
+    #education,
+    #contact {
+        padding: 12rem 5% 5rem;
+    }
+}
+
 /* =================================================
    PROJECTS
 ================================================= */
@@ -402,7 +526,7 @@ nav a:active {
 
 .project-grid {
     display: grid;
-    grid-template-columns: repeat(3, 1fr);
+    grid-template-columns: repeat(3, minmax(0, 1fr)); /* minmax(0, ...) stops long content forcing overflow */
     gap: 3rem;
 }
 
@@ -497,27 +621,17 @@ nav a:active {
     color: var(--color-dark);
 }
 
-@media (max-width: 995px) {
+/* RESPONSIVE: 3 columns get cramped just above 995px, so the
+   2-column layout now starts earlier, and 1 column on phones. */
+@media (max-width: 1100px) {
     .project-grid {
-        grid-template-columns: repeat(2, 1fr);
+        grid-template-columns: repeat(2, minmax(0, 1fr));
     }
 }
 
-@media (max-width: 600px) {
-    html {
-        font-size: 55%;
-    }
-
-    main {
-        padding: 12rem 5% 5rem;
-    }
-
-    .projects-container h1 {
-        font-size: 4.5rem;
-    }
-
+@media (max-width: 700px) {
     .project-grid {
-        grid-template-columns: 1fr;
+        grid-template-columns: minmax(0, 1fr);
     }
 }
 
@@ -542,7 +656,7 @@ nav a:active {
 
 .skills-grid {
     display: grid;
-    grid-template-columns: repeat(2, 1fr);
+    grid-template-columns: repeat(2, minmax(0, 1fr));
     gap: 3rem;
 }
 
@@ -602,27 +716,12 @@ nav a:active {
 }
 
 @media (max-width: 995px) {
-    /* Fixed: previously targeted ".skills", but the section in
-       the markup is "#skills" — this rule was dead code and
-       never applied. */
-    #skills {
-        padding: 12rem 5% 5rem;
-    }
-
     .skills-grid {
-        grid-template-columns: 1fr;
+        grid-template-columns: minmax(0, 1fr);
     }
 }
 
 @media (max-width: 600px) {
-    html {
-        font-size: 55%;
-    }
-
-    .skills-container h1 {
-        font-size: 4.5rem;
-    }
-
     .skill-card {
         padding: 2.5rem;
     }
@@ -685,7 +784,9 @@ nav a:active {
 
 .education-card {
     flex: 1;
+    min-width: 0; /* lets the card shrink instead of pushing the page wider */
     padding: 2.5rem;
+    overflow-wrap: anywhere;
 }
 
 .education-card:hover {
@@ -718,27 +819,12 @@ nav a:active {
 }
 
 @media (max-width: 995px) {
-    /* Fixed: previously targeted ".education", but the section in
-       the markup is "#education" — this rule was dead code and
-       never applied. */
-    #education {
-        padding: 12rem 5% 5rem;
-    }
-
     .education-container {
         max-width: 800px;
     }
 }
 
 @media (max-width: 600px) {
-    html {
-        font-size: 55%;
-    }
-
-    .education-container h1 {
-        font-size: 4.5rem;
-    }
-
     .education-timeline::before {
         left: 2.5rem;
     }
@@ -767,6 +853,7 @@ nav a:active {
 
 #contact {
     min-height: 100vh;
+    min-height: 100svh;
     padding: 10rem 9% 5rem;
     background: transparent;
     display: flex;
@@ -780,7 +867,7 @@ nav a:active {
 }
 
 .contact-content h1 {
-    font-size: 6rem;
+    font-size: clamp(3.6rem, 9vw, 6rem);
     font-weight: 600;
     line-height: 1.2;
     margin-bottom: 2rem;
@@ -804,6 +891,7 @@ nav a:active {
 }
 
 .contact-item i {
+    flex-shrink: 0; /* keeps the circle round when the text next to it is long */
     width: 5rem;
     height: 5rem;
     display: flex;
@@ -826,10 +914,12 @@ nav a:active {
 .contact-item h3 {
     font-size: 1.8rem;
     margin-bottom: 0.5rem;
+    overflow-wrap: anywhere;
 }
 
 .contact-item p {
     font-size: 1.5rem;
+    overflow-wrap: anywhere; /* long email addresses no longer overflow */
 }
 
 .contact-form {
@@ -878,4 +968,45 @@ nav a:active {
     padding: 10px;
     text-align: center;
     border-radius: 20px;
+}
+
+/* RESPONSIVE: the contact section had no media query at all, so the
+   info and form stayed side by side with an 8rem gap and overflowed. */
+@media (max-width: 995px) {
+    #contact {
+        flex-direction: column;
+        gap: 5rem;
+    }
+
+    .contact-content,
+    .contact-form {
+        width: 100%;
+        max-width: 550px;
+    }
+}
+
+@media (max-width: 600px) {
+    .contact-form {
+        padding: 2rem;
+    }
+
+    .input-box {
+        flex-direction: column; /* name / email stack instead of squeezing side by side */
+    }
+
+    .contact-item {
+        gap: 1.5rem;
+    }
+
+    .contact-item i {
+        width: 4.5rem;
+        height: 4.5rem;
+    }
+
+    /* At 55% root size, 1.6rem is ~14px. iOS Safari zooms the page when
+       a field under 16px gets focus, so fields are pinned to 16px here. */
+    .input-box input,
+    .contact-form textarea {
+        font-size: 16px;
+    }
 }
